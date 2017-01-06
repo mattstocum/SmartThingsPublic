@@ -41,19 +41,16 @@ preferences {
 }
 
 def installed(){
-	log.debug "Physical Tap installed"
 	subscribe(master, "switch", switchHandler)
 }
 
 def updated(){
-	log.debug "Physical Tap updated"
 	unsubscribe()
 	subscribe(master, "switch", switchHandler)
 }
 
 def switchHandler(evt) {
-	log.debug evt.name
-	log.debug "Event name: ${evt.name}, physical: ${evt.physical}, value: ${evt.value}"
+	log.trace "Event name: ${evt.name}, physical: ${evt.physical}, value: ${evt.value}"
 	if (evt.name == "switch" && evt.physical) {
 		log.debug "Master Switch physical switch event"
 		switch (evt.value) {
